@@ -15,13 +15,6 @@ resource "aws_subnet" "public2" {
 }
 
 
-resource "aws_subnet" "public3" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.public_cidr3
-  map_public_ip_on_launch = true
-  availability_zone       = "${var.region}c"
-  tags                    = var.tags
-}
 
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
@@ -44,10 +37,5 @@ resource "aws_route_table_association" "public1" {
 
 resource "aws_route_table_association" "public2" {
   subnet_id      = aws_subnet.public2.id
-  route_table_id = aws_route_table.public.id
-}
-
-resource "aws_route_table_association" "public3" {
-  subnet_id      = aws_subnet.public3.id
   route_table_id = aws_route_table.public.id
 }
